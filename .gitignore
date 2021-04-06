@@ -1,0 +1,8 @@
+.DS_Store
+target/
+private/
+logs/
+config.xml
+pictureframe.jar
+config.xml
+config.xml*
