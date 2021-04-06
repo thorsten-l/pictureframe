@@ -1,12 +1,11 @@
-# bbb2influxdb
+# pictureframe
 
-Writes statistic data of several BigBlueButton server nodes to an influxdb
+Java Software for a Pictureframe
 
 ## Usage
 
-Copy `config.xml` from the `sample`-directory into the `bin`-directory and edit it to your needings.
+- At first start `./pictureframe.jar --create-config` to create the `config.xml` file.
 
-The JAR-File in the `bin`-directory is direct executable.
+- Second edit `config.xml` with your favorite editor.
 
-### run
-`./bbb2influxdb.jar`
+- Third start `./pictureframe.jar` and enjoy your pictures.
