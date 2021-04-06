@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>sonia.app</groupId>
   <artifactId>pictureframe</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
   <properties>
@@ -163,6 +163,9 @@
       <properties>
         <logback.xml>logback.devel.xml</logback.xml>
       </properties>
+    </profile>
+    <profile>
+      <id>production</id>
     </profile>
   </profiles>
   
