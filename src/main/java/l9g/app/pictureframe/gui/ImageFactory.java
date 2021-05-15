@@ -6,8 +6,10 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -83,7 +85,7 @@ public class ImageFactory
     return file;
   }
 
-  private BufferedImage getNextImage() throws IOException
+  private BufferedImage getNextImage()
   {
     BufferedImage image = null;
 
@@ -91,8 +93,16 @@ public class ImageFactory
 
     if (imageFile != null)
     {
-      LOGGER.debug("Reading picture: {}", imageFile.getAbsolutePath());
-      image = ImageIO.read(imageFile);
+      try (InputStream imageInputStream = new FileInputStream(imageFile))
+      {
+        LOGGER.debug("Reading picture: {}", imageFile.getAbsolutePath());
+        image = ImageIO.read(imageInputStream);
+      }
+      catch (IOException e)
+      {
+        image = null;
+        LOGGER.error("ERROR: reading image: ", e);
+      }
     }
 
     return image;
@@ -105,10 +115,10 @@ public class ImageFactory
 
     int nextImage = 1 - currentImage;
 
-    try
-    {
-      BufferedImage image = getNextImage();
+    BufferedImage image = getNextImage();
 
+    if (image != null)
+    {
       imageBuffer[nextImage] = new BufferedImage(
         config.getScreenWidth(), config.getScreenHeight(),
         BufferedImage.TYPE_4BYTE_ABGR);
@@ -151,9 +161,9 @@ public class ImageFactory
 
       g.drawImage(scaledImage, x, y, null);
     }
-    catch (IOException ex)
+    else
     {
-      LOGGER.error("IO Error");
+      LOGGER.info( "Image not available." );
     }
   }
 

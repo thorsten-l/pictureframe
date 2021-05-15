@@ -13,4 +13,6 @@ sleep 2
 echo turning mouse cursor off
 unclutter -idle 0 &
 
+mv logs logs.`date '+%Y%m%d-%H%M%S'`
+
 ./pictureframe.jar
